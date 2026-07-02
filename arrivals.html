@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Alex Clothing | Luxury African Fashion House</title>
+<link rel="stylesheet" href="arrivals.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<section class="top-bar">
+    <p>Complimentary Nationwide Delivery • Luxury African Fashion House • Timeless Elegance & Prestige</p>
+</section>
+
+<!-- HEADER -->
+<header class="header">
+
+    <div class="logo">
+        <img src="picture/screen.png" alt="Alex Clothing Logo">
+        <div>
+            <h1>Alex Clothing</h1>
+            <span>Luxury African Fashion House</span>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <a href="project.html">Home</a>
+        <a href="collections.html">Collections</a>
+        <a href="arrivals.html">New Arrivals</a>
+        <a href="lookbook.html">Lookbook</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="nav-icon" onclick="toggleCart()">
+        🛍 <span id="cartCount">0</span>
+    </div>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <h2>New Arrivals</h2>
+    <p>Luxury pieces crafted for elegance</p>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+    <div class="grid">
+
+        <div class="card">
+            <img src="picture/crop1.jpg">
+            <h3>Royal Agbada</h3>
+            <p>₦220,000</p>
+            <button onclick="addToCart('Royal Agbada',220000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop2.jpg">
+            <h3>Ankara Set</h3>
+            <p>₦180,000</p>
+            <button onclick="addToCart('Ankara Set',180000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop3.jpg">
+            <h3>Silk Bubu</h3>
+            <p>₦195,000</p>
+            <button onclick="addToCart('Silk Bubu',195000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop4.jpg">
+            <h3>Luxury Kaftan</h3>
+            <p>₦210,000</p>
+            <button onclick="addToCart('Luxury Kaftan',210000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop5.jpg">
+            <h3>Modern Agbada</h3>
+            <p>₦230,000</p>
+            <button onclick="addToCart('Modern Agbada',230000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop6.jpg">
+            <h3>Royal Dress</h3>
+            <p>₦200,000</p>
+            <button onclick="addToCart('Royal Dress',200000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop7.jpg">
+            <h3>purple attire</h3>
+            <p>₦240,000</p>
+            <button onclick="addToCart('purple attire',240000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop8.jpg">
+            <h3>Luxury Set</h3>
+            <p>₦260,000</p>
+            <button onclick="addToCart('Luxury Set',260000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="picture/crop9.jpg">
+            <h3>Elite Wear</h3>
+            <p>₦250,000</p>
+            <button onclick="addToCart('Elite Wear',250000)">Add to Cart</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- CART -->
+<div class="cart" id="cart">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <span onclick="toggleCart()">✕</span>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <h3>Total: ₦<span id="total">0</span></h3>
+
+    <button class="checkout" onclick="checkout()">Checkout</button>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name, price){
+    cart.push({name, price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+    flashCart();
+}
+
+function removeItem(index){
+    cart.splice(index,1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart(){
+    let cartItems = document.getElementById("cartItems");
+    let total = 0;
+    let count = 0;
+
+    cartItems.innerHTML = "";
+
+    cart.forEach((item,index)=>{
+        total += item.price;
+        count++;
+
+        cartItems.innerHTML += `
+        <div class="item">
+            <span>${item.name}</span>
+            <div>
+                ₦${item.price.toLocaleString()}
+                <button onclick="removeItem(${index})">x</button>
+            </div>
+        </div>`;
+    });
+
+    document.getElementById("total").innerText = total.toLocaleString();
+    document.getElementById("cartCount").innerText = count;
+}
+
+function toggleCart(){
+    document.getElementById("cart").classList.toggle("open");
+}
+
+function flashCart(){
+    document.querySelector(".nav-icon").classList.add("pulse");
+    setTimeout(()=>{
+        document.querySelector(".nav-icon").classList.remove("pulse");
+    },300);
+}
+
+function checkout(){
+    window.location.href = "checkout.html";
+}
+
+updateCart();
+</script>
+  <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-grid">
+
+
+            <div>
+
+                <h2>Alex Clothing</h2>
+
+                <p>
+                    A premium African fashion destination inspired by
+                    culture, luxury, craftsmanship, and timeless sophistication.
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>Company</h3>
+
+                <a href="about.html">About Us</a>
+
+                <a href="designers.html">Designers</a>
+
+                <a href="collection.html">Collections</a>
+
+                <a href="lookbook.html">Lookbook</a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>Support</h3>
+
+                <a href="contact.html">Contact</a>
+
+                <a href="#">Returns</a>
+
+                <a href="#">Privacy Policy</a>
+
+                <a href="#">Terms & Conditions</a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>Follow Us</h3>
+
+                <a href="https://www.instagram.com/alexii01_dan">Instagram</a>
+
+                <a href="https://web.facebook.com/daniel.ibebuike.2025">Facebook</a>
+
+                <a href="https://www.tiktok.com/@joegalvinsclothing/video/7626386239196794132?is_from_webapp=1&sender_device=pc">TikTok</a>
+
+                <a href="https://www.pinterest.com/">Pinterest</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Alex Clothing — Luxury African Fashion House.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ========================= -->
+    <!-- HERO SLIDER SCRIPT -->
+    <!-- ========================= -->
+
+    <script>
+
+        const slides = document.querySelectorAll('.slide');
+
+        let currentSlide = 0;
+
+        function changeSlide() {
+
+            slides[currentSlide].classList.remove('active');
+
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            slides[currentSlide].classList.add('active');
+
+        }
+
+        setInterval(changeSlide, 5000);
+
+        
+
+    </script>
+
+
+</body>
+
+</html>
+</body>
+</html>
+
+</body>
+</html>
